@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribal Crafts Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        header {
+            position: relative;
+            text-align: center;
+            height: 300px; 
+        }
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center bottom; 
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            width: 90%; 
+        }
+        .container {
+            font-family: Algerian, sans-serif; 
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px auto; 
+        }
+        h1 {
+            font-size: 36px;
+            font-family: Algerian, sans-serif;
+            margin-bottom: 10px;
+            color: #333; 
+        }
+        p {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #333; 
+        }
+        nav {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px; 
+            border-radius: 8px; 
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 0 10px; 
+        }
+        nav a:hover {
+            background-color: #666;
+        }
+        .crafts, .theme-crafts, .accessories {
+            display: none; 
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .craft {
+            text-align: center;
+            transition: transform 0.2s ease; 
+            cursor: pointer; 
+        }
+        .craft img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .craft:hover {
+            transform: scale(1.1); 
+        }
+        .shop-now-button {
+            background-color: #ff9c24ec; 
+            border: none;
+            color: white;
+            padding: 10px 15px; 
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px; 
+            font-family: Algerian, sans-serif; 
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.3s ease; 
+            display: inline-block; 
+        }
+
+        .center-button {
+            text-align: center;
+        }
+
+        .shop-now-button:hover {
+            transform: scale(1.10); 
+        }
+        .buy-now-button, .accessories .buy-now-button {
+            background-color: #ee0673ac; 
+            border: none;
+            color: white;
+            padding: 10px 15px; 
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px; 
+            font-family: Algerian, sans-serif; 
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.3s ease; 
+            display: block; 
+            margin: 0 auto; 
+            width: fit-content; 
+        }
+        .buy-now-button:hover {
+            transform: scale(1.15); 
+        }
+
+        .about-us {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+        }
+        .contact-us {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .contact-email {
+            font-size: 24px;
+            color: #333;
+        }
+        footer {
+            text-align: center;
+            background-color: #7ba3d4;
+            color: white;
+            padding: 10px 0;
+            border-radius: 8px;
+        }
+        .theme-crafts {
+            display: none; 
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .theme-crafts.active {
+            display: flex;
+        }
+        .theme-crafts .craft img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease; 
+        }
+        .theme-crafts .craft img:hover {
+            transform: scale(1.2);
+        }
+        .accessories .craft {
+            flex: 0 0 auto; 
+            max-width: 200px; 
+            height: 300px; 
+            margin: 0 10px; 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        
+        .accessories .craft img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+        .accessories {
+            display: none; 
+            flex-wrap: nowrap; 
+            overflow-x: auto; 
+            margin-bottom: 20px; 
+            padding: 10px; 
+            max-height: 300px; 
+            position: sticky; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background-color: rgba(255, 255, 255, 0.9); 
+            z-index: 999; 
+        }
+        
+        .accessories::-webkit-scrollbar {
+                display: none; 
+            }
+        </style>
+    
+    </style>
+</head>
+<body>
+    <header>
+        <img class="header-image" src="https://previews.agefotostock.com/previewimage/medibigoff/cdc8ed21e32d1875ce59774597847001/y6v-2885027.jpg" alt="Tribal Crafts Image">
+        <div class="header-content">
+            <h1>Tribal Crafts Store</h1>
+            <nav>
+                <a href="#" onclick="toggleCrafts()">Home</a> 
+                <a href="#" onclick="toggleThemeCrafts()">Theme Crafts</a>
+                <a href="#" onclick="toggleAccessories()">Accessories</a>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2>WELCOME TO OUR CRAFTS!</h2>
+        <p>Tribal crafts Indian tribal craft is an impressive section in trendy Indian times that slowly has taken in a cultured look. The ultimate get-up that such tribal crafts receive to adorn and deck subtle Indian city homes, can maybe only be represented after a radical admiration. Indian tribal crafts are available in each space of decoration and embellishment, with varied irresistible decisions, intensifying one`s urge to buy tribal product. . Indian tribal crafts verily mirror the lives of their users, their food and its supply, their observances to pacify indefinite forces that incorporate their arts and crafts, music and dance. Some of the various tribal crafts manufactured in India include: Antiques, Art, Baskets, Paper Mache, Ceramics, Clock creating, Embroidery, Block Printing, ornamental Painting, Glass Work, Fabric, Furniture, Gifts, Home Décor, Jewellery, leather Crafts, Metal Crafts, Paper Crafts, Pottery, Puppets, Stone and Wood Works. It completely expressed through art and reflects its use in their crafts. Indian tribal craft is usually ritualistic, rubbing off a definite line between the artist and also the art lover Tribal crafts ar passionate about the native plant system.</p>
+    </div>
+    <div class="crafts">
+        <div class="craft">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHl7TB5UnRylAPz4aEl19j0EVs5WRIrEqXdw&s" alt="Craft 1">
+            <h3>BASTOR IRON CRAFT-TRIBAL BOAT</h3>
+            <p>$50</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-wJLEpWFwF97HgdRr5PmlE7-LEg5HQpMnUA&s" alt="Craft 2">
+            <h3>HANDI CRATS MASKS</h3>
+            <p>$70</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://images.picxy.com/cache/2020/5/29/9a327f335f351707175278cf2608f0c2.jpg" alt="Craft 3">
+            <h3>HOME DECOR ITEMS</h3>
+            <p>$85</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://www.datocms-assets.com/46272/1633186581-1633186580250.jpeg?auto=format&fit=max&w=1200" alt="Craft 4">
+            <h3>METAL CRAFT</h3>
+            <p>$90</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+    </div>
+    <div class="theme-crafts">
+        <div class="craft">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfFInNSWUT9-e9RWxoc8mZRrxaDkJCA9OjlQ&s" alt="Theme Craft 1">
+            <p>$40</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2023/8/336088761/CS/LC/JU/181042026/whatsapp-image-2023-08-18-at-5-13-44-am-1-500x500.jpeg" alt="Theme Craft 2">
+             <p>$70</p>
+              <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPs_xiUPFH2z8vaoiSFqJ4vSVyO6rrkCX5dA&s" alt="Theme Craft 3">
+            <p>$80</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiNbR8964XbBgd5iiqM_9ELlsArCIAm1ghzw&s" alt="Theme Craft 4">
+            <p>$100</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+    </div>
+    <div class="accessories">
+        <div class="craft">
+            <img src="https://dpyp86bbt6lo4.cloudfront.net/pics/Statement-black-onyx-turquoise-blue-beaded-necklace-earrings-set-42662_1_full.jpg" alt ='accessories 1'>
+            <p>$150</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://www.indianetzone.com/photos_gallery/79/1_Tribal_Jewellery_of_India.jpg" alt ="accessories 2">
+            <p>$165</p>
+            <a href="#" class="buy-now-button">Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://www.youngisthan.in/hindi/wp-content/uploads/2016/03/bastar-wooden-jewellery-1280x720.jpg" alt ="accessories 3">
+            <p>$190</p>
+            <a href="#" class="buy-now-button"> Buy Now</a>
+        </div>
+        <div class="craft">
+            <img src="https://i.pinimg.com/736x/d4/58/8a/d4588afd50d4b4a1064fefd573c2eda1.jpg" alt ="accessories 4">
+            <p>$190</p>
+            <a href="#" class="buy-now-button"> Buy Now</a>
+        </div>
+    </div><br>
+    <a href="#" class="shop-now-button center-button">Shop Now</a> 
+    <div class="about-us container">
+        <h2>About Us</h2>
+        <p>At Tribal Crafts, we believe that every piece of tribal art tells a story – a story of tradition, culture, and the innate creativity of indigenous peoples. Our journey began with a profound appreciation for the beauty and significance of tribal craftsmanship, and we're dedicated to sharing this passion with the world.</p>
+        <p>Our store is not just a marketplace; it's a platform for empowerment. We work directly with artisans from tribal communities across India, ensuring fair wages and ethical practices. By supporting these talented individuals, we're not only preserving ancient traditions but also fostering sustainable livelihoods for generations to come.</p>
+        <p>Each item in our collection is handpicked for its quality, authenticity, and cultural significance. Whether it's a handwoven rug from the hills of Nagaland, a intricately carved wooden mask from Kerala, or a vibrant piece of tribal jewelry from Rajasthan, every purchase you make directly supports the artisan who created it.</p>
+        <p>But our commitment goes beyond commerce. We're dedicated to raising awareness about tribal cultures and their invaluable contributions to the world of art and craftsmanship. Through educational initiatives, community outreach programs, and partnerships with indigenous organizations, we're striving to create a more inclusive and equitable world for all.</p>    <div class="contact-us container">
+        <h2>Contact Us</h2>
+        <p>For inquiries and orders, please contact us at:</p>
+        <p class="contact-email">tribal@gmail.com</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 Tribal Crafts Store. All rights reserved.</p>
+    </footer>
+    <script>document.addEventListener("DOMContentLoaded", function() {
+        var crafts = document.querySelector(".crafts");
+        var paragraph = document.querySelector("p");
+        var themeCrafts = document.querySelector(".theme-crafts");
+        var accessories = document.querySelector(".accessories");
+        crafts.style.display = "none";
+        paragraph.style.display = "block";
+        themeCrafts.style.display = "none";
+        accessories.style.display = "none";
+    });
+    
+    function toggleCrafts() {
+        var crafts = document.querySelector(".crafts");
+        var paragraph = document.querySelector("p");
+        var themeCrafts = document.querySelector(".theme-crafts");
+        var accessories = document.querySelector(".accessories");
+        if (crafts.style.display === "none") {
+            crafts.style.display = "flex"; 
+            paragraph.style.display = "none"; 
+            themeCrafts.style.display = "none"; 
+            accessories.style.display = "none"; 
+        } else {
+            crafts.style.display = "none"; 
+            paragraph.style.display = "block";
+        }
+    }
+    
+    function toggleThemeCrafts() {
+        var themeCrafts = document.querySelector(".theme-crafts");
+        var accessories = document.querySelector(".accessories");
+    
+        if (themeCrafts.style.display === "none") {
+            themeCrafts.style.display = "flex" ;
+            hideHomePageCrafts(); 
+            accessories.style.display = "none"; 
+        } else {
+            themeCrafts.style.display = "none"; 
+            showHomePageCrafts(); 
+        }
+    }
+    
+    function hideHomePageCrafts() {
+        var homeCrafts = document.querySelector(".crafts");
+        homeCrafts.style.display = "none";
+    }
+    
+    function showHomePageCrafts() {
+        var homeCrafts = document.querySelector(".crafts");
+        homeCrafts.style.display = "flex";
+    }
+    function toggleAccessories() {
+        var accessories = document.querySelector(".accessories");
+        var crafts = document.querySelector(".crafts");
+        var themeCrafts = document.querySelector(".theme-crafts");
+        var paragraph = document.querySelector("p");
+        if (accessories.style.display === "none" || accessories.style.display === "") {
+            accessories.style.display = "flex"; 
+            crafts.style.display = "none"; 
+            themeCrafts.style.display = "none"; 
+        } else {
+            accessories.style.display = "none"; 
+            crafts.style.display = "flex"; 
+            paragraph.style.display = "block"; 
+        }
+    }
+    
+    
+    </script>
+</body>
+</html>
